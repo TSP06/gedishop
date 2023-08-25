@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="form">
+      
+        <ul class="tab-group">
+          <li class="tab active"><a href="#signup">Sign Up</a></li>
+          <li class="tab"><a href="#login">Log In</a></li>
+        </ul>
+        
+        <div class="tab-content">
+          <div id="signup">   
+            <h1>Sign Up for Free</h1>
+            
+            <form action="/" method="post">
+            
+            <div class="top-row">
+              <div class="field-wrap">
+                <label>
+                  First Name<span class="req">*</span>
+                </label>
+                <input type="text" required autocomplete="off" />
+              </div>
+          
+              <div class="field-wrap">
+                <label>
+                  Last Name<span class="req">*</span>
+                </label>
+                <input type="text"required autocomplete="off"/>
+              </div>
+            </div>
+  
+            <div class="field-wrap">
+              <label>
+                Email Address<span class="req">*</span>
+              </label>
+              <input type="email"required autocomplete="off"/>
+            </div>
+            
+            <div class="field-wrap">
+              <label>
+                Set A Password<span class="req">*</span>
+              </label>
+              <input type="password"required autocomplete="off"/>
+            </div>
+            
+            <button type="submit" class="button button-block"/>Get Started</button>
+            
+            </form>
+  
+          </div>
+          
+          <div id="login">   
+            <h1>Welcome Back!</h1>
+            
+            <form action="/" method="post">
+            
+              <div class="field-wrap">
+              <label>
+                Email Address<span class="req">*</span>
+              </label>
+              <input type="email"required autocomplete="off"/>
+            </div>
+            
+            <div class="field-wrap">
+              <label>
+                Password<span class="req">*</span>
+              </label>
+              <input type="password"required autocomplete="off"/>
+            </div>
+            
+            <p class="forgot"><a href="#">Forgot Password?</a></p>
+            
+            <button class="button button-block"/>Log In</button>
+            
+            </form>
+  
+          </div>
+          
+        </div><!-- tab-content -->
+        
+  </div> <!-- /form -->
+
+  <script>
+  // Function to toggle label classes based on input field value
+function handleInputInteraction(input) {
+  var label = input.previousElementSibling;
+  if (input.value === '') {
+    label.classList.remove('active', 'highlight');
+  } else {
+    label.classList.add('active', 'highlight');
+  }
+}
+
+// Attach event listeners to input and textarea fields
+var formInputs = document.querySelectorAll('.form input, .form textarea');
+formInputs.forEach(function(input) {
+  input.addEventListener('keyup', function(e) {
+    handleInputInteraction(this);
+  });
+  input.addEventListener('blur', function(e) {
+    handleInputInteraction(this);
+  });
+  input.addEventListener('focus', function(e) {
+    handleInputInteraction(this);
+  });
+});
+
+// Function to handle tab navigation
+function handleTabClick(event) {
+  event.preventDefault();
+  
+  var clickedTab = event.currentTarget;
+  var parentLi = clickedTab.parentNode;
+  parentLi.classList.add('active');
+  
+  var siblings = parentLi.parentNode.children;
+  for (var i = 0; i < siblings.length; i++) {
+    if (siblings[i] !== parentLi) {
+      siblings[i].classList.remove('active');
+    }
+  }
+  
+  var target = clickedTab.getAttribute('href');
+  var tabContents = document.querySelectorAll('.tab-content > div');
+  tabContents.forEach(function(content) {
+    if (content.id === target.substring(1)) {
+      content.style.display = 'block';
+    } else {
+      content.style.display = 'none';
+    }
+  });
+}
+
+// Attach event listeners to tab links
+var tabLinks = document.querySelectorAll('.tab a');
+tabLinks.forEach(function(link) {
+  link.addEventListener('click', handleTabClick);
+});
+
+
+  </script>
+</body>
+</html>
